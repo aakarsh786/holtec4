@@ -1,0 +1,170 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/About.css">
+    <link rel="stylesheet" href="/css/navbarFooter.css">
+</head>
+<body>
+    <!-- Navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <h1 class="navbar-brand">HOLTECHUNT</h1>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" id="home" href="@Url.Action("Homepage", "homie")"><i class="fas fa-home me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="@Url.Action("AboutUs", "homie")"><i class="fas fa-info-circle me-1"></i>About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Alljobs", "homie")"><i class="fas fa-briefcase me-1"></i>All Jobs</a>
+                    </li>
+                    @if (ViewBag.userrole == "admin")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Usermanagement", "homie")"><i class="fas fa-wrench me-1"></i>User Management</a>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-envelope me-1"></i>Contact</a>
+                    </li>
+                </ul>
+                @if (ViewBag.userrole == "admin")
+                {
+                    <a href="@Url.Action("postjob","homie")" class="btn btn-outline-danger me-2" id="postajob">
+                        <i class="fas fa-plus-circle me-2"></i>Post a Job
+                    </a>
+                }
+                @*<a href="../Login&Signup/login_interact.html" class="btn btn-success">
+                <i class="fas fa-sign-in-alt me-2"></i>Log In
+                </a>*@
+                <!-- User dp with log-out and profile tabs -->
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle user-dp" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle me-1"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="@Url.Action("Logout", "homie")">Log Out</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("Userprofile", "homie")">Profile</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar end -->
+    <!--Main Content start-->
+    <div class="banner" id="lifeatholtec">
+        <h1>Life at Holtec Asia</h1>
+    </div>
+    <div class="about-section">
+        <div class="about-header">
+            <h2>When we innovate and collaborate, it creates invaluable possibilities for everyone.</h2>
+        </div>
+        <div class="about-stats">
+            <div class="stat-item">
+                <img src="../Images/employees.png" alt="Employees">
+                <h3>20,000+</h3>
+                <p>Holtec Asia employees unlocking their potential</p>
+            </div>
+            <div class="stat-item">
+                <img src="../Images/global.png" alt="Global Offices">
+                <h3>50+</h3>
+                <p>Global offices strengthening our inclusive culture</p>
+            </div>
+            <div class="stat-item">
+                <img src="../Images/business&Collaboration.png" alt="Business Units">
+                <h3>10</h3>
+                <p>Business units driving collaboration</p>
+            </div>
+        </div>
+        <div class="benefits-section">
+            <h2>Live well from day 1: Benefits at Holtec Asia</h2>
+            <p>We are committed to supporting the health and wellbeing of our diverse workforce across the globe.</p>
+            <p>As part of that commitment, Holtec Asia offers generous benefit programs and policies that are designed using global standards to ensure the financial, emotional, social, and physical wellbeing of all our employees and their loved ones.</p>
+            <form asp-action="Alljobs">
+                <button>Apply now</button>
+            </form>
+        </div>
+    </div>
+    <div class="why-join-section" id="why-join-section">
+        <h2>Why join Holtec Asia?</h2>
+        <div class="benefits-container">
+            <div class="benefit-item">
+                <img src="../Images/career&development.jpg" alt="Learning and Development">
+                <h3>Learning and career development</h3>
+                <p>Feed your curiosity through industry-leading content from Holtec Asia's Learning Academies and open new doors. Your opportunity network to make impact and form mentorships.</p>
+            </div>
+            <div class="benefit-item">
+                <img src="../Images/efforts.jpg_large" alt="Inclusion Efforts">
+                <h3>Our inclusion efforts</h3>
+                <p>We strive to create a culture of decency and belonging at Holtec Asia. Our action plans and key initiatives deepen our culture of inclusion and drive equitable access to opportunities.</p>
+            </div>
+            <div class="benefit-item">
+                <img src="../Images/forceofgood.webp" alt="Force of Good">
+                <h3>Be a force of good</h3>
+                <p>At Holtec Asia, we believe in doing well by doing good. We are on a mission to build a sustainable world that unlocks invaluable possibilities for all.</p>
+            </div>
+        </div>
+    </div>
+    <!--Main Content end-->
+    <!-- Footer section start -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <img src="../Images/whitelogo.png" alt="Holtec International Logo" class="footer-logo">
+                <address>
+                    <strong>Holtec International</strong><br>
+                    1 Holtec Boulevard<br>
+                    Camden, NJ 08104, USA<br>
+                    Phone: +1 (856) 797-0900
+                </address>
+            </div>
+            <div class="footer-section">
+                <p>
+                    <b><u>About Us</u></b>
+                    <br><br>
+                    Holtec International is a global turnkey supplier of equipment
+                    and systems for the energy industry and beyond. As a fully
+                    integrated supplier, Holtec possesses in-house capabilities to
+                    design, engineer, analyze, license, fabricate and construct
+                    these technologies. With nearly 1.5 million square feet of
+                    manufacturing space and innovation that knows no limits, Holtec
+                    provides components of exceptional quality and with timely
+                    delivery.
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-icons">
+                <a href="#"><img src="../Images/facebook.png" alt="Facebook"></a>
+                <a href="#"><img src="../Images/linkedin.png" alt="LinkedIn"></a>
+                <a href="#"><img src="../Images/instagram.png" alt="Instagram"></a>
+                <a href="#"><img src="../Images/twitter.png" alt="Twitter"></a>
+            </div>
+            <p>&copy; 2024 Holtec International. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Footer section end -->
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="
+https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

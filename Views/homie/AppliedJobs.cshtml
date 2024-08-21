@@ -1,0 +1,750 @@
+﻿@model List<holtec4.ViewModels.AppliedJobViewModel>
+
+@{
+    ViewBag.Title = "Applied Jobs";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - HOLTECHUNT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/navbarFooter.css">
+    <style>
+        :root {
+            --primary-color: #d9534f;
+            --secondary-color: #5cb85c;
+            --background-color: #f0f2f5;
+            --text-color: #222;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--background-color) 0%, #e6e9f0 100%);
+            color: var(--text-color);
+        }
+
+        .navbar {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color) !important;
+            font-size: 2rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+        }
+
+        #profile-section {
+            display: flex;
+            padding: 2rem 0;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @@keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar .profile {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .sidebar .profile .cover-photo {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar .profile img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid var(--primary-color);
+            transition: transform 0.1s ease;
+        }
+
+        .sidebar .profile img:hover {
+            transform: scale(1.05);
+        }
+
+        .sidebar ul li a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.1s ease;
+            border-radius: 5px;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: rgba(74, 144, 226, 0.1);
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 0 2rem;
+        }
+
+        .dashboard {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-box {
+            background-color: var(--card-bg);
+            border-left: 5px solid var(--primary-color);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            width: 30%;
+            transition: all 0.1s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-box span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* user-dashboard-info-box */
+        .user-dashboard-info-box .candidates-list .thumb {
+            margin-right: 20px;
+        }
+
+        .user-dashboard-info-box .candidates-list .thumb img {
+            width: 80px;
+            height: 80px;
+            -o-object-fit: cover;
+            object-fit: cover;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+
+        .user-dashboard-info-box .title {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 30px 0;
+        }
+
+        .user-dashboard-info-box .candidates-list td {
+            vertical-align: middle;
+        }
+
+        .user-dashboard-info-box td li {
+            margin: 0 4px;
+        }
+
+        .user-dashboard-info-box .table thead th {
+            border-bottom: none;
+        }
+
+        .table.manage-candidates-top th {
+            border: 0;
+        }
+
+        .user-dashboard-info-box .candidate-list-favourite-time .candidate-list-favourite {
+            margin-bottom: 10px;
+        }
+
+        .table.manage-candidates-top {
+            min-width: 650px;
+        }
+
+        .user-dashboard-info-box .candidate-list-details ul {
+            color: #969696;
+        }
+
+        /* Candidate List */
+        .candidate-list {
+            background: #ffffff;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            border-bottom: 1px solid #eeeeee;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 20px;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .candidate-list:hover {
+            -webkit-box-shadow: 0px 0px 34px 4px rgba(33, 37, 41, 0.06);
+            box-shadow: 0px 0px 34px 4px rgba(33, 37, 41, 0.06);
+            position: relative;
+            z-index: 99;
+        }
+
+        .candidate-list:hover a.candidate-list-favourite {
+            color: #e74c3c;
+            -webkit-box-shadow: -1px 4px 10px 1px rgba(24, 111, 201, 0.1);
+            box-shadow: -1px 4px 10px 1px rgba(24, 111, 201, 0.1);
+        }
+
+        .candidate-list .candidate-list-image {
+            margin-right: 25px;
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 80px;
+            flex: 0 0 80px;
+            border: none;
+        }
+
+        .candidate-list .candidate-list-image img {
+            width: 80px;
+            height: 80px;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+
+        .candidate-list-title {
+            margin-bottom: 5px;
+        }
+
+        .candidate-list-details ul {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-bottom: 0px;
+        }
+
+        .candidate-list-details ul li {
+            margin: 5px 10px 5px 0px;
+            font-size: 13px;
+        }
+
+        .candidate-list .candidate-list-favourite-time {
+            margin-left: auto;
+            text-align: center;
+            font-size: 13px;
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 90px;
+            flex: 0 0 90px;
+        }
+
+        .candidate-list-title a {
+            color: inherit;
+            /* Inherits the color from the parent element */
+            text-decoration: none;
+            /* Removes the underline */
+        }
+
+        .candidate-list .candidate-list-favourite-time span {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .candidate-list .candidate-list-favourite-time .candidate-list-favourite {
+            display: inline-block;
+            position: relative;
+            height: 40px;
+            width: 40px;
+            line-height: 40px;
+            border: 1px solid #eeeeee;
+            border-radius: 100%;
+            text-align: center;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #646f79;
+        }
+
+        .candidate-list .candidate-list-favourite-time .candidate-list-favourite:hover {
+            background: #ffffff;
+            color: #e74c3c;
+        }
+
+        .candidate-banner .candidate-list:hover {
+            position: inherit;
+            -webkit-box-shadow: inherit;
+            box-shadow: inherit;
+            z-index: inherit;
+        }
+
+        .bg-white {
+            background-color: #ffffff !important;
+        }
+
+        .p-4 {
+            padding: 1.5rem !important;
+        }
+
+        .mb-0,
+        .my-0 {
+            margin-bottom: 0 !important;
+        }
+
+        .shadow-sm {
+            box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+        }
+
+        .user-dashboard-info-box .candidates-list .thumb {
+            margin-right: 20px;
+        }
+
+        /* Job Listing Styles */
+        .job-listings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .job-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 28px;
+            background-color: #fff;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .job-type-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .job-type {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .full-time { background-color: #e8f5e9; color: #2e7d32; }
+        .part-time { background-color: #e3f2fd; color: #1565c0; }
+        .urgent { background-color: #fbe9e7; color: #d84315; }
+        .contract { background-color: #e0f7fa; color: #00695c; }
+        .featured { background-color: #fff8e1; color: #f9a825; }
+
+        .job-title {
+            font-size: 1.4em;
+            margin: 18px 0;
+            color: #1a237e;
+        }
+
+        .company-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 18px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .job-details {
+            font-size: 1em;
+            color: #546e7a;
+        }
+
+        .job-details p {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .job-details p i {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+
+        .skills {
+            margin-top: 20px;
+            flex-grow: 1;
+        }
+
+        .skill {
+            display: inline-block;
+            background-color: #eceff1;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            color: #37474f;
+            transition: all 0.2s ease;
+        }
+
+        .skill:hover {
+            background-color: #cfd8dc;
+        }
+
+        .apply-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eceff1;
+        }
+
+        .job-details-link {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background-color: #e8f5e9;
+        }
+
+        .job-details-link:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #side {
+            list-style-type: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1f1f1f;
+            color: #ffffff;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffffff;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .social-icons a {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+        }
+
+        @@media (max-width: 768px) {
+            #profile-section {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-bottom: 2rem;
+            }
+
+            .main-content {
+                padding: 0 1rem;
+            }
+
+            .stats {
+                flex-direction: column;
+            }
+
+            .stat-box {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <h1 class="navbar-brand">HOLTECHUNT</h1>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home" href="@Url.Action("Homepage","homie")"><i class="fas fa-home me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("AboutUs","homie")"><i class="fas fa-info-circle me-1"></i>About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Alljobs","homie")"><i class="fas fa-briefcase me-1"></i>All Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Usermanagement","homie")"><i class="fas fa-wrench me-1"></i>User Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-envelope me-1"></i>Contact</a>
+                    </li>
+                </ul>
+                <a href="@Url.Action("postjob","homie")" class="btn btn-outline-danger me-2" id="postajob"><i
+                        class="fas fa-plus-circle me-2"></i>Post a Job</a>
+                
+            <!-- User dp with log-out and profile tabs -->
+            <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle user-dp" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle me-1"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="@Url.Action("Logout","homie")">Log Out</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("Userprofile","homie")">Profile</a></li>
+
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar end -->
+
+
+    <!--Profile Section Start-->
+    <div class="container" id="profile-section">
+        <div class="sidebar">
+            <div class="profile">
+                <img src="../UserProfile/dp.png" alt="User Picture">
+                <h3>Prerna Singh</h3>
+                <p>Software Engineer</p>
+                <p class="d-none"><i class="fas fa-map-marker-alt"></i> Mumbai, India</p>
+                <p><i class="fas fa-envelope"></i> prerna@example.com</p>
+            </div>
+            <ul id="side">
+                <li><a href="@Url.Action("Userprofile","homie")"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-star"></i> Shortlisted Jobs</a></li>
+                <li><a href="@Url.Action("AppliedJobs","homie")"><i class="fas fa-clipboard-list"></i> Applied Job</a></li>
+                <li><a href="#"><i class="fas fa-save"></i> Saved Job</a></li>
+                <li><a href="@Url.Action("Userdata","homie")"><i class="fas fa-user"></i> My Profile</a></li>
+                <li><a href="@Url.Action("Logout","homie")"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="dashboard">
+                <h2>Applied Jobs</h2>
+                <!-- Job Listings Section -->
+                <section class="job-listings">
+
+                    <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
+                        <!-- Table for all candidates -->
+
+                        <table class="table manage-candidates-top mb-0">
+                            <tbody>
+                                @foreach (var job in Model)
+                                {
+                                <tr class="candidates-list">
+                                    <td class="title">
+                                        <div class="row col-2">
+                                            <div class="thumb">
+                                                <img src="https://logo.clearbit.com/adobe.com" alt="InnoTech Solutions" class="company-logo">
+                                            </div>
+                                        </div>
+                                        <div class="row col-7">
+                                                <h2 class="job-title">@job.JobTitle</h2>
+                                            <h5 class="mb-0">Innnotech Solutions</h5>
+                                        </div>
+                                        <div class="row col-3">
+                                            <div class="job-details">
+                                                <p><i class="fas fa-map-marker-alt"></i> @job.Location</p>
+                                                <p><i class="fas fa-dollar-sign"></i> @job.Salary</p>
+                                                <p><i class="fas fa-clock"></i> Experience: 5 Years</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <ul class="list-unstyled mb-0 d-flex justify-content-center">
+                                            <li>
+                                                <a href="#" class="text-white" data-toggle="tooltip" title="" data-original-title="View">
+                                                    <svg height="30px" viewBox="0 -960 960 960" width="30px" fill="#00BFFF">
+                                                        <path d="M480.09-336.92q67.99 0 115.49-47.59t47.5-115.58q0-67.99-47.59-115.49t-115.58-47.5q-67.99 0-115.49 47.59t-47.5 115.58q0 67.99 47.59 115.49t115.58 47.5ZM480-392q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm.05 172q-137.97 0-251.43-76.12Q115.16-372.23 61.54-500q53.62-127.77 167.02-203.88Q341.97-780 479.95-780q137.97 0 251.43 76.12Q844.84-627.77 898.46-500q-53.62 127.77-167.02 203.88Q618.03-220 480.05-220ZM480-500Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/>
+                                                    </svg>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="text-center mt-3 mt-sm-3">
+                            <ul class="pagination justify-content-center mb-0">
+                                <li class="page-item disabled"> <span class="page-link">Prev</span> </li>
+                                <li class="page-item active" aria-current="page"><span class="page-link">1 </span> <span
+                                        class="sr-only">(current)</span></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                <li class="page-item"><a class="page-link" href="#">25</a></li>
+                                <li class="page-item"> <a class="page-link" href="#">Next</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!--Profile Section End-->
+
+    <!-- Footer section start -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <img src="../Images/whitelogo.png" alt="Holtec International Logo" class="footer-logo">
+                <address>
+                    <strong>Holtec International</strong><br>
+                    1 Holtec Boulevard<br>
+                    Camden, NJ 08104, USA<br>
+                    Phone: +1 (856) 797-0900
+                </address>
+            </div>
+            <div class="footer-section">
+                <p>
+                    <b><u>About Us</u></b>
+                    <br><br>
+                    Holtec International is a global turnkey supplier of equipment
+                    and systems for the energy industry and beyond. As a fully
+                    integrated supplier, Holtec possesses in-house capabilities to
+                    design, engineer, analyze, license, fabricate and construct
+                    these technologies. With nearly 1.5 million square feet of
+                    manufacturing space and innovation that knows no limits, Holtec
+                    provides components of exceptional quality and with timely
+                    delivery.
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-icons">
+                <a href="#"><img src="../Images/facebook.png" alt="Facebook"></a>
+                <a href="#"><img src="../Images/linkedin.png" alt="LinkedIn"></a>
+                <a href="#"><img src="../Images/instagram.png" alt="Instagram"></a>
+                <a href="#"><img src="../Images/twitter.png" alt="Twitter"></a>
+            </div>
+            <p>&copy; 2024 Holtec International. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Footer section end -->
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

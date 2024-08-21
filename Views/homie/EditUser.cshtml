@@ -1,0 +1,629 @@
+﻿@model holtec4.Models.Alluserdatum
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/navbarFooter.css">
+    <link rel="stylesheet" href="/css/test.css">
+
+
+    <!-- Font Awesome CSS -->
+
+    <style>
+        :root {
+            --primary-color: #d9534f;
+            --secondary-color: #5cb85c;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+            padding: 1rem 0;
+            z-index: 1;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color) !important;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+            .nav-link:hover, .nav-link.active {
+                color: var(--primary-color) !important;
+            }
+
+        .btn {
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+            .btn-outline-primary:hover {
+                background-color: var(--primary-color);
+                color: #fff;
+            }
+
+        .btn-success {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+            .btn-success:hover {
+                background-color: #4cae4c;
+                border-color: #4cae4c;
+            }
+
+
+
+        /* Additional styles for the Post a Job form */
+        .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .form-label {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+            .form-control:focus,
+            .form-select:focus {
+                border-color: var(--primary-color);
+                box-shadow: 0 0 0 0.2rem rgba(255, 127, 80, 0.25);
+            }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <h1 class="navbar-brand">HOLTECHUNT</h1>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home" href="../HomePage/HomePage.html"><i class="fas fa-home me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../AboutPage/About.Html"><i class="fas fa-info-circle me-1"></i>About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../AllJobsPage/AllJobs.html"><i class="fas fa-briefcase me-1"></i>All Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../CandidateHrProfile/AllUsers.html"><i class="fas fa-wrench me-1"></i>User Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-envelope me-1"></i>Contact</a>
+                    </li>
+                </ul>
+                <a href="../PostJob/PostAJob.html" class="btn btn-outline-danger me-2" id="postajob">
+                    <i class="fas fa-plus-circle me-2"></i>Post a Job
+                </a>
+                <a href="../Login&Signup/login_interact.html" class="btn btn-success">
+                    <i class="fas fa-sign-in-alt me-2"></i>Log In
+                </a>
+                <!-- User dp with log-out and profile tabs -->
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle user-dp" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle me-1"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="../Login&Signup/login_interact.html">Log Out</a></li>
+                        <li><a class="dropdown-item" href="../UserProfile/UserProfile.html">Profile</a></li>
+
+                </div>
+            </div>
+    </nav>
+    <!-- Navbar end -->
+    <!--Main Content-->
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <section class="wizard-section">
+                            <div class="form-wizard">
+                                <form asp-action="EditUser" method="post" role="form" enctype="multipart/form-data">
+                                    <div class="form-wizard-header">
+                                        <ul class="list-unstyled form-wizard-steps clearfix">
+                                            <li class="active"><span>1</span></li>
+                                            <li><span>2</span></li>
+                                            <li><span>3</span></li>
+                                            <li><span>4</span></li>
+                                            <li><span>5</span></li>
+                                        </ul>
+                                    </div>
+                                    <fieldset class="wizard-fieldset show">
+                                        <h5>Personal Information</h5>
+                                        <input type="hidden" asp-for="Userid" />
+                                        <input type="hidden" asp-for="Userrole" />
+                                        <div class="form-group">
+                                            <input type="text" asp-for="Firstname" class="form-control wizard-required" id="fullname">
+                                            <label for="firstname" class="wizard-form-text-label"></label>
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" asp-for="Lastname" class="form-control wizard-required" id="fullname">
+                                            <label for="lastname" class="wizard-form-text-label"></label>
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="date" asp-for="Dateofbirth" class="form-control wizard-required" id="dob">
+                                            <label for="dob" class="wizard-form-text-label"></label>
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="number" asp-for="PhoneNumber" class="form-control wizard-required" id="phonenumber">
+                                            <label for="phonenumber" class="wizard-form-text-label"></label>
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                        <div class="form-group clearfix" style="display: flex;justify-content: center;">
+                                            <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset class="wizard-fieldset">
+                                        <h5>Education Details</h5>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <input type="text" asp-for="ClassX" class="form-control wizard-required" id="school10">
+                                                    <label for="school10" class="wizard-form-text-label">10th Institute Name*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <input type="number" asp-for="XYear" class="form-control wizard-required" id="year10">
+                                                    <label for="year10" class="wizard-form-text-label">10th Year*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="number" asp-for="XMarks" class="form-control wizard-required" id="marks10">
+                                                    <label for="year10" class="wizard-form-text-label">10th Marks*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <input type="text" asp-for="ClassXii" class="form-control wizard-required" id="school12">
+                                                    <label for="school12" class="wizard-form-text-label">12th Institute Name*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <input type="number" asp-for="XiiYear" class="form-control wizard-required" id="year12">
+                                                    <label for="year12" class="wizard-form-text-label">12th Year*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="number" asp-for="XiiMarks" class="form-control wizard-required" id="marks12">
+                                                    <label for="year12" class="wizard-form-text-label">12th Marks*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <input type="text" asp-for="Diploma" class="form-control"
+                                                               id="diploma-name">
+                                                        <label for="diploma-name" class="wizard-form-text-label">Diploma Institute Name*</label>
+                                                        <div class="wizard-form-error"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <input type="number" asp-for="DiplomaYear" class="form-control" id="diploma-year">
+                                                        <label for="diploma-year" class="wizard-form-text-label">Diploma Year*</label>
+                                                        <div class="wizard-form-error"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <input type="number" asp-for="DiplomaMarks" class="form-control" id="diploma-marks">
+                                                        <label for="diploma-marks" class="wizard-form-text-label">Diploma Marks*</label>
+                                                        <div class="wizard-form-error"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <input type="text" asp-for="Bachelors" class="form-control wizard-required" id="ug-name">
+                                                        <label for="ug-name" class="wizard-form-text-label">UG institute Name*</label>
+                                                        <div class="wizard-form-error"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <input type="number" asp-for="BachelorsYear" class="form-control wizard-required" id="ug-date">
+                                                        <label for="ug-date" class="wizard-form-text-label">UG Year*</label>
+                                                        <div class="wizard-form-error"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <input type="number" asp-for="BachelorsMarks" class="form-control wizard-required" id="ug-marks">
+                                                        <label for="ug-marks" class="wizard-form-text-label">UG Marks*</label>
+                                                        <div class="wizard-form-error"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <input type="text" asp-for="Masters" class="form-control" id="pg-name">
+                                                        <label for="pg-name" class="wizard-form-text-label">PG institute Name*</label>
+                                                        <div class="wizard-form-error"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <input type="number" asp-for="MastersYear" class="form-control" id="pg-year">
+                                                        <label for="pg-year" class="wizard-form-text-label">PG Year*</label>
+                                                        <div class="wizard-form-error"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <input type="number" asp-for="MastersMarks" class="form-control" id="pg-marks">
+                                                        <label for="pg-marks" class="wizard-form-text-label">PG Marks*</label>
+                                                        <div class="wizard-form-error"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group clearfix" style="display: flex;justify-content: center;">
+                                                <a href="javascript:;" class="form-wizard-previous-btn">Previous</a>
+                                                <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
+                                            </div>
+                                    </fieldset>
+                                    <fieldset class="wizard-fieldset">
+                                        <h5>Past Working Experience Details</h5>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" asp-for="Company1" class="form-control wizard-required" id="company1">
+                                                    <label for="company1" class="wizard-form-text-label">Company Name 1*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="text" asp-for="Role1" class="form-control wizard-required" id="company-role-1">
+                                                    <label for="company-role-1" class="wizard-form-text-label">Role*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="number" asp-for="Years1" class="form-control wizard-required" id="company-year-1">
+                                                    <label for="company-year-1" class="wizard-form-text-label">Year*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" asp-for="Company2" class="form-control" id="company2">
+                                                    <label for="company2" class="wizard-form-text-label">Company Name 2*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="text" asp-for="Role2" class="form-control" id="company-role-2">
+                                                    <label for="company-role-2" class="wizard-form-text-label">Role*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="number" asp-for="Years2" class="form-control" id="company-year-2">
+                                                    <label for="company-year-2" class="wizard-form-text-label">Year*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" asp-for="Company3" class="form-control" id="company3">
+                                                    <label for="company3" class="wizard-form-text-label">Company Name 3*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="text" asp-for="Role3" class="form-control" id="company-role-3">
+                                                    <label for="company-role-3" class="wizard-form-text-label">Role*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="number" asp-for="Years3" class="form-control" id="company-year-3">
+                                                    <label for="company-year-3" class="wizard-form-text-label">Year*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" asp-for="Company4" class="form-control" id="company4">
+                                                    <label for="company4" class="wizard-form-text-label">Company Name 4*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="text" asp-for="Role4" class="form-control" id="company-role-4">
+                                                    <label for="company-role-4" class="wizard-form-text-label">Role*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="number" asp-for="Years4" class="form-control" id="company-year-4">
+                                                    <label for="company-year-4" class="wizard-form-text-label">Year*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <input type="text" asp-for="Company5" class="form-control" id="company5">
+                                                    <label for="company5" class="wizard-form-text-label">Company Name 5*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="text" asp-for="Role5" class="form-control" id="company-role-5">
+                                                    <label for="company-role-5" class="wizard-form-text-label">Role*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <input type="number" asp-for="Years5" class="form-control" id="company-year-5">
+                                                    <label for="company-year-5" class="wizard-form-text-label">Year*</label>
+                                                    <div class="wizard-form-error"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group clearfix" style="display: flex;justify-content: center;">
+                                            <a href="javascript:;"
+                                               class="form-wizard-previous-btn float-left">Previous</a>
+                                            <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset class="wizard-fieldset">
+                                        <h5>Skills</h5>
+                                        <div class="form-group">
+                                            <div class="wizard-form-checkbox">
+                                                <input type="checkbox" asp-for="Cplusplus" id="skill1">
+                                                <label for="skill1">C++</label>
+                                            </div>
+                                            <div class="wizard-form-checkbox">
+                                                <input type="checkbox" asp-for="Javascript" id="skill2">
+                                                <label for="skill2">JavaScript</label>
+                                            </div>
+                                            <div class="wizard-form-checkbox">
+                                                <input type="checkbox" asp-for="C" id="skill3">
+                                                <label for="skill3">C#</label>
+                                            </div>
+                                            <div class="wizard-form-checkbox">
+                                                <input type="checkbox" asp-for="Python" id="skill4">
+                                                <label for="skill4">Python</label>
+                                            </div>
+                                            <div class="wizard-form-checkbox">
+                                                <input type="checkbox" asp-for="Java" id="skill5">
+                                                <label for="skill5">Java</label>
+                                            </div>
+                                            <div class="wizard-form-checkbox">
+                                                <input type="checkbox" asp-for="Html" id="skill6">
+                                                <label for="skill6">HTML</label>
+                                            </div>
+                                            <div class="wizard-form-checkbox">
+                                                <input type="checkbox" asp-for="Flutter" id="skill7">
+                                                <label for="skill7">Flutter</label>
+                                            </div>
+                                            <div class="wizard-form-checkbox">
+                                                <input type="checkbox" asp-for="Aiml" id="skill8">
+                                                <label for="skill8">AI/ML</label>
+                                            </div>
+                                            <div class="wizard-form-checkbox">
+                                                <input type="checkbox" asp-for="React" id="skill9">
+                                                <label for="skill9">React</label>
+                                            </div>
+                                            <div class="wizard-form-checkbox">
+                                                <input type="checkbox" asp-for="Angular" id="skill10">
+                                                <label for="skill10">Angular</label>
+                                            </div>
+                                            <div class="wizard-form-checkbox">
+                                                <input type="checkbox" asp-for="Autocad" id="skill11">
+                                                <label for="skill11">AutoCAD</label>
+                                            </div>
+                                            <div class="wizard-form-checkbox">
+                                                <input type="checkbox" asp-for="ComputerGraphics" id="skill12">
+                                                <label for="skill12">Computer Graphics</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group clearfix" style="display: flex;justify-content: center;">
+                                            <a href="javascript:;"
+                                               class="form-wizard-previous-btn float-left">Previous</a>
+                                            <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset class="wizard-fieldset">
+                                        <h5>Upload</h5>
+                                        <div class="form-group">
+                                            <label for="resume">Resume*</label>
+                                            <input type="file" asp-for="Resume" class="form-control wizard-required" id="resume">
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="profilePhoto">Profile Photo*</label>
+                                            <input type="file" asp-for="Profilepic" class="form-control wizard-required" id="profilePhoto">
+                                            <div class="wizard-form-error"></div>
+                                        </div>
+                                        <div class="form-group clearfix" style="display: flex;justify-content: center;">
+                                            <a href="javascript:;"
+                                               class="form-wizard-previous-btn float-left">Previous</a>
+                                            @*<a href="javascript:;" class="form-wizard-submit float-right">Submit</a>*@
+                                            <button class="btn btn-primary" type="submit">submit</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer section start -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <img src="../Images/whitelogo.png" alt="Holtec International Logo" class="footer-logo">
+                <address>
+                    <strong>Holtec International</strong><br>
+                    1 Holtec Boulevard<br>
+                    Camden, NJ 08104, USA<br>
+                    Phone: +1 (856) 797-0900
+                </address>
+            </div>
+            <div class="footer-section">
+                <h4>Working at Holtec</h4>
+                <ul>
+                    <li><a href="#">Browse jobs</a></li>
+                    <li><a href="#">Talent community</a></li>
+                    <li><a href="#">Alumni</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>About us</h4>
+                <ul>
+                    <li><a href="#">Life at Holtec</a></li>
+                    <li><a href="#">Diversity & Inclusion</a></li>
+                    <li><a href="#">Locations</a></li>
+                    <li><a href="#">Interview tips</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Students</h4>
+                <ul>
+                    <li><a href="#">Opportunities for students</a></li>
+                    <li><a href="#">Entry level positions</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-icons">
+                <a href="#"><img src="../Images/facebook.png" alt="Facebook"></a>
+                <a href="#"><img src="../Images/linkedin.png" alt="LinkedIn"></a>
+                <a href="#"><img src="../Images/instagram.png" alt="Instagram"></a>
+                <a href="#"><img src="../Images/twitter.png" alt="Twitter"></a>
+            </div>
+            <p>&copy; 2024 Holtec International. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Site Map</a>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer section end -->
+
+    <script src="/js/test.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js">
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+
+</html>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+

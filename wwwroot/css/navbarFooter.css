@@ -1,0 +1,315 @@
+/* CSS Variables for easy color management */
+:root {
+    --primary-color: #d9534f;
+    --secondary-color: #2ecc71;
+    --text-color: #333;
+    --hover-color: #d9534f;
+}
+
+/* Body background */
+body {
+    background-image: url('120257856_p0.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: rgb(255, 255, 255);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+    z-index: 5;
+}
+
+/* Navbar hover effect */
+.navbar:hover {
+    background-color: rgb(255, 255, 255);
+}
+
+/* Brand (logo) styling */
+.navbar-brand {
+    font-weight: 800;
+    font-size: 2.5rem !important;
+    color: var(--primary-color) !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Brand shine effect */
+.navbar-brand::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgb(255, 255, 255), transparent);
+    transition: 0.5s;
+}
+
+.navbar-brand:hover::before {
+    left: 100%;
+}
+
+/* Navigation link styling */
+.nav-link {
+    color: var(--text-color) !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    margin: 0 0.2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    opacity: 0.8;
+}
+
+/* Navigation link hover effect */
+.nav-link:hover {
+    color: var(--primary-color) !important;
+    opacity: 1;
+}
+
+/* Navigation link underline effect */
+.nav-link::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-link:hover::before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+/* Active navigation link */
+.nav-link.active {
+    font-weight: bold;
+    color: var(--primary-color) !important;
+    opacity: 1;
+}
+
+/* Button styling */
+.btn {
+    transition: all 0.3s ease;
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* 'Post a Job' button styling */
+.btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 0 20px rgba(255, 127, 80, 0.5);
+}
+
+/* 'Log In' button styling */
+.btn-success {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-success:hover {
+    background-color: #27ae60;
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+    background-color: rgb(255, 255, 255);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Dropdown item styling */
+.dropdown-item {
+    color: var(--text-color);
+    padding: 10px 25px;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(255, 127, 80, 0.1);
+    color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+/* User dp with log-out and profile tabs css */
+.user-dp {
+    margin-left: 5px;
+}
+
+/* Fade-in animation for navbar items */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -30px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.navbar-nav .nav-item {
+    opacity: 0;
+    animation: fadeInDown 0.5s ease forwards;
+}
+
+/* Staggered animation delay for navbar items */
+.navbar-nav .nav-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.navbar-nav .nav-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.navbar-nav .nav-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.navbar-nav .nav-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.navbar-nav .nav-item:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.navbar-nav .nav-item:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+footer {
+    background-color: #222;
+    color: #fff;
+    padding: 4rem 0 2rem;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 2rem;
+}
+
+.footer-logo {
+    max-width: 150px;
+    margin-bottom: 1.5rem;
+}
+
+.footer-section h4 {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-section ul li a {
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 3rem auto 0;
+    padding: 2rem 15px 0;
+    border-top: 1px solid #444;
+}
+
+.social-icons a {
+    margin-right: 1rem;
+}
+
+.social-icons img {
+    width: 24px;
+    height: 24px;
+    filter: invert(100%);
+    transition: opacity 0.3s ease;
+}
+
+.social-icons img:hover {
+    opacity: 0.8;
+}
+
+.footer-links a {
+    color: #bbb;
+    margin-left: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .search-fields {
+        flex-direction: column;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-links {
+        margin-top: 1.5rem;
+    }
+
+    .footer-links a {
+        margin: 0 0.75rem;
+    }
+}

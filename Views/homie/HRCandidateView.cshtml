@@ -1,0 +1,289 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/navbarFooter.css">
+    <link rel="stylesheet" href="/css/CandidateHRProfile.css">
+    <style>
+    </style>
+</head>
+<body>
+    <!-- Navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <h1 class="navbar-brand">HOLTECHUNT</h1>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home" href="@Url.Action("Homepage", "homie")"><i class="fas fa-home me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("AboutUs", "homie")"><i class="fas fa-info-circle me-1"></i>About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Alljobs", "homie")"><i class="fas fa-briefcase me-1"></i>All Jobs</a>
+                    </li>
+                    @if (ViewBag.userrole == "admin")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Usermanagement", "homie")"><i class="fas fa-wrench me-1"></i>User Management</a>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-envelope me-1"></i>Contact</a>
+                    </li>
+                </ul>
+                @if (ViewBag.userrole == "admin")
+                {
+                    <a href="@Url.Action("postjob","homie")" class="btn btn-outline-danger me-2" id="postajob">
+                        <i class="fas fa-plus-circle me-2"></i>Post a Job
+                    </a>
+                }
+                @*<a href="../Login&Signup/login_interact.html" class="btn btn-success">
+                    <i class="fas fa-sign-in-alt me-2"></i>Log In
+                </a>*@
+                <!-- User dp with log-out and profile tabs -->
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle user-dp" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle me-1"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="@Url.Action("Logout", "homie")">Log Out</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("Userprofile", "homie")">Profile</a></li>
+
+                </div>
+            </div>
+    </nav>
+    <!-- Navbar end -->
+    <!-- Modal -->
+    <div class="modal fade" id="contactModal" role="dialog" aria-labelledby="contactModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width: 100%;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">Candidate Status Update Form</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-secondary" id="stage1">Stage 1</button>
+                        <button class="btn btn-secondary" id="stage2">Stage 2</button>
+                        <button class="btn btn-secondary" id="stage3">Stage 3</button>
+                        <button class="btn btn-secondary" id="stage4">Stage 4</button>
+                    </div>
+                    <textarea class="form-control mt-3" id="statusComment" rows="4" placeholder="Enter comments..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="submitStatus">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="profile-card">
+            <div class="profile-header">
+                <img src="../UserProfile/dp.png" alt="Andrei Popescu" class="profile-image">
+                <div class="profile-info">
+                    <h1>@ViewBag.Fullname</h1>
+                    <h2>Software Developer</h2>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-actions">
+                <button data-toggle="modal" data-target="#contactModal" class="btn btn-primary">Update Status</button>
+                <button class="btn btn-secondary">Download CV</button>
+            </div>
+            <div class="profile-content">
+                <section>
+                    <h3>About Me</h3>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                </section>
+                <section>
+                    <h3>Details</h3>
+                    <ul class="details-list">
+                        <li><strong>Age:</strong> 33</li>
+                        <li><strong>Location:</strong> Bucharest, Romania</li>
+                        <li><strong>Email:</strong> @ViewBag.Email</li>
+                        <li><strong>Phone:</strong> +40 721 987 654</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Education</h3>
+                    <div class="education-item">
+                        <h4>Bachelor's in Computer Science</h4>
+                        <p>@ViewBag.Masters, @ViewBag.MastersYear</p>
+                    </div>
+                    <div class="education-item">
+                        <h4>Bachelor's in Computer Science</h4>
+                        <p>@ViewBag.Bachelors, @ViewBag.BachelorsYear</p>
+                    </div>
+                    <div class="education-item">
+                        <h4>Bachelor's in Computer Science</h4>
+                        <p>@ViewBag.ClassXii, @ViewBag.XiiYear</p>
+                    </div>
+                    <div class="education-item">
+                        <h4>Bachelor's in Computer Science</h4>
+                        <p>@ViewBag.ClassX, @ViewBag.XYear</p>
+                    </div>
+                    <div class="education-item">
+                        <h4>Bachelor's in Computer Science</h4>
+                        <p>@ViewBag.Diploma, @ViewBag.DiplomaYear</p>
+                    </div>
+                </section>
+                <section>
+                    <h3>Experience</h3>
+                    <div class="experience-item">
+                        <h4>Senior Software Developer</h4>
+                        <p>TechSavvy Solutions, 2015-2019</p>
+                        <p>Led development teams in creating innovative software solutions.</p>
+                    </div>
+                    <div class="experience-item">
+                        <h4>Software Engineer</h4>
+                        <p>DigitalCraft Innovations, 2019-2022</p>
+                        <p>Developed and maintained complex web applications.</p>
+                    </div>
+                    <div class="experience-item">
+                        <h4>Software Engineer</h4>
+                        <p>DigitalCraft Innovations, 2019-2022</p>
+                        <p>Developed and maintained complex web applications.</p>
+                    </div>
+                    <div class="experience-item">
+                        <h4>Software Engineer</h4>
+                        <p>DigitalCraft Innovations, 2019-2022</p>
+                        <p>Developed and maintained complex web applications.</p>
+                    </div>
+                    <div class="experience-item">
+                        <h4>Software Engineer</h4>
+                        <p>DigitalCraft Innovations, 2019-2022</p>
+                        <p>Developed and maintained complex web applications.</p>
+                    </div>
+                </section>
+                <section>
+                    <h3>Skills</h3>
+                    <ul class="skills-list">
+                        <li>Java</li>
+                        <li>Spring</li>
+                        <li>Microservices</li>
+                        <li>RESTful APIs</li>
+                        <li>SQL</li>
+                        <li>Git</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer section start -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <img src="../Images/whitelogo.png" alt="Holtec International Logo" class="footer-logo">
+                <address>
+                    <strong>Holtec International</strong><br>
+                    1 Holtec Boulevard<br>
+                    Camden, NJ 08104, USA<br>
+                    Phone: +1 (856) 797-0900
+                </address>
+            </div>
+            <div class="footer-section">
+                <p>
+                    <b><u>About Us</u></b>
+                    <br><br>
+                    Holtec International is a global turnkey supplier of equipment
+                    and systems for the energy industry and beyond. As a fully
+                    integrated supplier, Holtec possesses in-house capabilities to
+                    design, engineer, analyze, license, fabricate and construct
+                    these technologies. With nearly 1.5 million square feet of
+                    manufacturing space and innovation that knows no limits, Holtec
+                    provides components of exceptional quality and with timely
+                    delivery.
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-icons">
+                <a href="#"><img src="../Images/facebook.png" alt="Facebook"></a>
+                <a href="#"><img src="../Images/linkedin.png" alt="LinkedIn"></a>
+                <a href="#"><img src="../Images/instagram.png" alt="Instagram"></a>
+                <a href="#"><img src="../Images/twitter.png" alt="Twitter"></a>
+            </div>
+            <p>&copy; 2024 Holtec International. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Footer section end -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="
+https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var selectedStage = '';
+
+            // Handle stage button clicks
+            $('#stage1, #stage2, #stage3, #stage4').click(function () {
+                selectedStage = $(this).text();
+                if (selectedStage == 'Stage 1') {
+                    $('#stage1').removeClass('btn-secondary').addClass('btn-success');
+                    $('#stage2, #stage3, #stage4').removeClass('btn-success').addClass('btn-secondary');
+                }
+                else if (selectedStage == 'Stage 2') {
+                    $('#stage1, #stage2').removeClass('btn-secondary').addClass('btn-success');
+                    $('#stage3, #stage4').removeClass('btn-success').addClass('btn-secondary');
+                }
+                else if (selectedStage == 'Stage 3') {
+                    $('#stage1, #stage2, #stage3').removeClass('btn-secondary').addClass('btn-success');
+                    $('#stage4').removeClass('btn-success').addClass('btn-secondary');
+                }
+                else if (selectedStage == 'Stage 4') {
+                    $('#stage1, #stage2, #stage3, #stage4').removeClass('btn-secondary').addClass('btn-success');
+                }
+                else {
+                    $('#stage1, #stage2, #stage3, #stage4').removeClass('btn-success').addClass('btn-secondary');
+                }
+            });
+
+            // Handle submit button click
+            $('#submitStatus').click(function () {
+                var comment = $('#statusComment').val();
+                if (!selectedStage) {
+                    alert('Please select a stage.');
+                    return;
+                }
+                if (!comment) {
+                    alert('Please enter a comment.');
+                    return;
+                }
+                // Process form submission here
+                console.log('Stage:', selectedStage);
+                console.log('Comment:', comment);
+
+                // Close modal
+                $('#contactModal').modal('hide');
+            });
+        });
+    </script>
+</body>
+</html>

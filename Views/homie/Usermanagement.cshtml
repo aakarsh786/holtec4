@@ -1,0 +1,1287 @@
+﻿@model IEnumerable<holtec4.Models.Alluserdatum>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <!-- <link rel="stylesheet" href="/AllJobsPage/AllJobs.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/navbarFooter.css">
+
+    <style>
+        /* CSS Variables for easy color management */
+        :root {
+            --primary-color: #d9534f;
+            --secondary-color: #5cb85c;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color) !important;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+            .nav-link:hover,
+            .nav-link.active {
+                color: var(--primary-color) !important;
+            }
+
+        .btn {
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+            .btn-outline-primary:hover {
+                background-color: var(--primary-color);
+                color: #fff;
+            }
+
+        .btn-success {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+            .btn-success:hover {
+                background-color: #4cae4c;
+                border-color: #4cae4c;
+            }
+
+        /* Main Content*/
+
+        body {
+            background-color: #f8f9fa !important
+        }
+
+        .p-4 {
+            padding: 1.5rem !important;
+        }
+
+        .mb-0,
+        .my-0 {
+            margin-bottom: 0 !important;
+        }
+
+        .shadow-sm {
+            box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+        }
+
+        /* user-dashboard-info-box */
+        .user-dashboard-info-box .candidates-list .thumb {
+            margin-right: 20px;
+        }
+
+            .user-dashboard-info-box .candidates-list .thumb img {
+                width: 80px;
+                height: 80px;
+                -o-object-fit: cover;
+                object-fit: cover;
+                overflow: hidden;
+                border-radius: 50%;
+            }
+
+        .user-dashboard-info-box .title {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 30px 0;
+        }
+
+        .user-dashboard-info-box .candidates-list td {
+            vertical-align: middle;
+        }
+
+        .user-dashboard-info-box td li {
+            margin: 0 4px;
+        }
+
+        .user-dashboard-info-box .table thead th {
+            border-bottom: none;
+        }
+
+        .table.manage-candidates-top th {
+            border: 0;
+        }
+
+        .user-dashboard-info-box .candidate-list-favourite-time .candidate-list-favourite {
+            margin-bottom: 10px;
+        }
+
+        .table.manage-candidates-top {
+            min-width: 650px;
+        }
+
+        .user-dashboard-info-box .candidate-list-details ul {
+            color: #969696;
+        }
+
+        /* Candidate List */
+        .candidate-list {
+            background: #ffffff;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            border-bottom: 1px solid #eeeeee;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 20px;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .candidate-list:hover {
+                -webkit-box-shadow: 0px 0px 34px 4px rgba(33, 37, 41, 0.06);
+                box-shadow: 0px 0px 34px 4px rgba(33, 37, 41, 0.06);
+                position: relative;
+                z-index: 99;
+            }
+
+                .candidate-list:hover a.candidate-list-favourite {
+                    color: #e74c3c;
+                    -webkit-box-shadow: -1px 4px 10px 1px rgba(24, 111, 201, 0.1);
+                    box-shadow: -1px 4px 10px 1px rgba(24, 111, 201, 0.1);
+                }
+
+            .candidate-list .candidate-list-image {
+                margin-right: 25px;
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 80px;
+                flex: 0 0 80px;
+                border: none;
+            }
+
+                .candidate-list .candidate-list-image img {
+                    width: 80px;
+                    height: 80px;
+                    -o-object-fit: cover;
+                    object-fit: cover;
+                }
+
+        .candidate-list-title {
+            margin-bottom: 5px;
+        }
+
+        .candidate-list-details ul {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-bottom: 0px;
+        }
+
+            .candidate-list-details ul li {
+                margin: 5px 10px 5px 0px;
+                font-size: 13px;
+            }
+
+        .candidate-list .candidate-list-favourite-time {
+            margin-left: auto;
+            text-align: center;
+            font-size: 13px;
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 90px;
+            flex: 0 0 90px;
+        }
+
+        .candidate-list-title a {
+            color: inherit;
+            /* Inherits the color from the parent element */
+            text-decoration: none;
+            /* Removes the underline */
+        }
+
+        .candidate-list .candidate-list-favourite-time span {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .candidate-list .candidate-list-favourite-time .candidate-list-favourite {
+            display: inline-block;
+            position: relative;
+            height: 40px;
+            width: 40px;
+            line-height: 40px;
+            border: 1px solid #eeeeee;
+            border-radius: 100%;
+            text-align: center;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #646f79;
+        }
+
+            .candidate-list .candidate-list-favourite-time .candidate-list-favourite:hover {
+                background: #ffffff;
+                color: #e74c3c;
+            }
+
+        .candidate-banner .candidate-list:hover {
+            position: inherit;
+            -webkit-box-shadow: inherit;
+            box-shadow: inherit;
+            z-index: inherit;
+        }
+
+        .bg-white {
+            background-color: #ffffff !important;
+        }
+
+        .p-4 {
+            padding: 1.5rem !important;
+        }
+
+        .mb-0,
+        .my-0 {
+            margin-bottom: 0 !important;
+        }
+
+        .shadow-sm {
+            box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+        }
+
+        .user-dashboard-info-box .candidates-list .thumb {
+            margin-right: 20px;
+        }
+
+        #maincontent {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @@media (max-width: 991.98px) {
+
+            .dropdown-menu {
+                background-color: transparent;
+                border: none;
+                padding-left: 1rem;
+            }
+
+            .dropdown-item {
+                padding: 0.5rem 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+            .pagination .page-link.disabled {
+                color: #ccc;
+                cursor: not-allowed;
+            }
+            /* css for Search bar for candidates */
+            .search-fields {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <h1 class="navbar-brand">HOLTECHUNT</h1>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home" href="@Url.Action("Homepage", "homie")"><i class="fas fa-home me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("AboutUs", "homie")"><i class="fas fa-info-circle me-1"></i>About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Alljobs", "homie")"><i class="fas fa-briefcase me-1"></i>All Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Usermanagement", "homie")"><i class="fas fa-wrench me-1"></i>User Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-envelope me-1"></i>Contact</a>
+                    </li>
+                </ul>
+                <a href="@Url.Action("postjob","homie")" class="btn btn-outline-danger me-2" id="postajob">
+                    <i class="fas fa-plus-circle me-2"></i>Post a Job
+                </a>
+                @*<a href="../Login&Signup/login_interact.html" class="btn btn-success"><i
+                class="fas fa-sign-in-alt me-2"></i>Log In</a>*@
+                <!-- User dp with log-out and profile tabs -->
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle user-dp" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle me-1"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="@Url.Action("Logout", "homie")">Log Out</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("Userprofile", "homie")">Profile</a></li>
+
+                </div>
+            </div>
+    </nav>
+    <!-- Navbar end -->
+    <!-- Main Content -->
+    <div class="container mt-3 mb-4" id="maincontent">
+        <div class="col-lg-9 mt-4 mt-lg-0">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
+                        <!-- Search bar for candidates -->
+                        @*<div class="row search-fields">
+                        <div class="col-md-10">
+                        <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        </div>
+                        <div class="col-md-2">
+                        <div class="text-md-end">
+                        <button type="button" class="btn btn-primary">Search</button>
+                        </div>
+                        </div>
+                        </div>*@
+
+                        <!-- Search bar for candidates -->
+                        <form asp-action="Usermanagement" method="get">
+                            <div class="row search-fields">
+                                <div class="col-md-10">
+                                    <div class="mb-3">
+                                        <input type="text" name="searchString" class="form-control" placeholder="Search" value="@ViewBag.SearchString">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="text-md-end">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Search bar for candidates end-->
+                        <!-- Table for all candidates -->
+
+                        <table class="table manage-candidates-top mb-0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <h1>Username</h1>
+                                    </th>
+                                    <th class="action text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+
+                                    <tr class="candidates-list">
+                                        <td class="title">
+                                            <div class="thumb">
+                                                @{
+
+                                                    string base64String = item.Profilepic != null ? Convert.ToBase64String(item.Profilepic) : null;
+                                                }
+
+                                                @if (!string.IsNullOrEmpty(base64String))
+                                                {
+                                                    <img class="img-fluid" src="data:image/png;base64,@base64String" alt="Profile Picture">
+                                                }
+                                                else
+                                                {
+                                                    <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Default Profile Picture">
+                                                }
+                                            </div>
+                                            <div class="candidate-list-details">
+                                                <div class="candidate-list-info">
+                                                    <div class="candidate-list-title">
+                                                        <h5 class="mb-0"><a asp-action="HRCandidateView" asp-route-userId="@item.Userid">@Html.DisplayFor(modelItem => item.Firstname)</a></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <ul class="list-unstyled mb-0 d-flex justify-content-center">
+                                                <li>
+                                                    <a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit">
+                                                        <svg height="30px" viewBox="0 -960 960 960" width="30px" fill="green">
+                                                            <path d="M200-200h50.46l409.46-409.46-50.46-50.46L200-250.46V-200Zm-60 60v-135.38l527.62-527.39q9.07-8.24 20.03-12.73 10.97-4.5 23-4.5t23.3 4.27q11.28 4.27 19.97 13.58l48.85 49.46q9.31 8.69 13.27 20 3.96 11.31 3.96 22.62 0 12.07-4.12 23.03-4.12 10.97-13.11 20.04L275.38-140H140Zm620.38-570.15-50.23-50.23 50.23 50.23Zm-126.13 75.9-24.79-25.67 50.46 50.46-25.67-24.79Z" />
+                                                        </svg>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete">
+                                                        <svg height="30px" viewBox="0 -960 960 960" width="30px" fill="red">
+                                                            <path d="M292.31-140q-29.92 0-51.12-21.19Q220-182.39 220-212.31V-720h-40v-60h180v-35.38h240V-780h180v60h-40v507.69Q740-182 719-161q-21 21-51.31 21H292.31ZM680-720H280v507.69q0 5.39 3.46 8.85t8.85 3.46h375.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46V-720ZM376.16-280h59.99v-360h-59.99v360Zm147.69 0h59.99v-360h-59.99v360ZM280-720v520-520Z" />
+                                                        </svg>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+
+                        <div class="text-center mt-3 mt-sm-3">
+                            <ul class="pagination justify-content-center mb-0">
+                                <li class="page-item disabled"> <span class="page-link">Prev</span> </li>
+                                <li class="page-item active" aria-current="page">
+                                    <span class="page-link">1 </span> <span class="sr-only">(current)</span>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                <li class="page-item"><a class="page-link" href="#">25</a></li>
+                                <li class="page-item"> <a class="page-link" href="#">Next</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer section start -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <img src="../Images/whitelogo.png" alt="Holtec International Logo" class="footer-logo">
+                <address>
+                    <strong>Holtec International</strong><br>
+                    1 Holtec Boulevard<br>
+                    Camden, NJ 08104, USA<br>
+                    Phone: +1 (856) 797-0900
+                </address>
+            </div>
+            <div class="footer-section">
+                <p>
+                    <b><u>About Us</u></b>
+                    <br><br>
+                    Holtec International is a global turnkey supplier of equipment
+                    and systems for the energy industry and beyond. As a fully
+                    integrated supplier, Holtec possesses in-house capabilities to
+                    design, engineer, analyze, license, fabricate and construct
+                    these technologies. With nearly 1.5 million square feet of
+                    manufacturing space and innovation that knows no limits, Holtec
+                    provides components of exceptional quality and with timely
+                    delivery.
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-icons">
+                <a href="#"><img src="../Images/facebook.png" alt="Facebook"></a>
+                <a href="#"><img src="../Images/linkedin.png" alt="LinkedIn"></a>
+                <a href="#"><img src="../Images/instagram.png" alt="Instagram"></a>
+                <a href="#"><img src="../Images/twitter.png" alt="Twitter"></a>
+            </div>
+            <p>&copy; 2024 Holtec International. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Footer section end -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const pages = document.querySelectorAll('.page');
+            const paginationButtons = document.querySelectorAll('.pagination .page-link');
+            const prevButton = document.getElementById('prevPage');
+            const nextButton = document.getElementById('nextPage');
+
+            let currentPage = 1;
+            const totalPages = pages.length;
+
+            function showPage(pageNumber) {
+                pages.forEach((page, index) => {
+                    page.classList.toggle('d-none', index + 1 !== pageNumber);
+                });
+
+                currentPage = pageNumber;
+
+                // Update the button states
+                prevButton.classList.toggle('disabled', currentPage === 1);
+                nextButton.classList.toggle('disabled', currentPage === totalPages);
+
+                // Update button colors
+                const btnColor = '#ff7f50';
+                paginationButtons.forEach(button => {
+                    button.style.color = btnColor;
+                });
+                prevButton.style.color = nextButton.style.color = btnColor;
+            }
+
+            paginationButtons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const pageNumber = parseInt(this.getAttribute('data-page'));
+                    if (!isNaN(pageNumber)) {
+                        showPage(pageNumber);
+                    }
+                });
+            });
+
+            prevButton.addEventListener('click', function (event) {
+                event.preventDefault();
+                if (currentPage > 1) {
+                    showPage(currentPage - 1);
+                }
+            });
+
+            nextButton.addEventListener('click', function (event) {
+                event.preventDefault();
+                if (currentPage < totalPages) {
+                    showPage(currentPage + 1);
+                }
+            });
+
+            // Initialize to show first page
+            showPage(1);
+        });
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
+
+
+@*<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <!-- <link rel="stylesheet" href="/AllJobsPage/AllJobs.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="/css/navbarFooter.css">
+
+    <style>
+        /* CSS Variables for easy color management */
+        :root {
+            --primary-color: #d9534f;
+            --secondary-color: #5cb85c;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color) !important;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        .btn {
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .btn-success {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-success:hover {
+            background-color: #4cae4c;
+            border-color: #4cae4c;
+        }
+
+        /* Main Content*/
+
+        body {
+            background-color: #f8f9fa !important
+        }
+
+        .p-4 {
+            padding: 1.5rem !important;
+        }
+
+        .mb-0,
+        .my-0 {
+            margin-bottom: 0 !important;
+        }
+
+        .shadow-sm {
+            box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+        }
+
+        /* user-dashboard-info-box */
+        .user-dashboard-info-box .candidates-list .thumb {
+            margin-right: 20px;
+        }
+
+        .user-dashboard-info-box .candidates-list .thumb img {
+            width: 80px;
+            height: 80px;
+            -o-object-fit: cover;
+            object-fit: cover;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+
+        .user-dashboard-info-box .title {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 30px 0;
+        }
+
+        .user-dashboard-info-box .candidates-list td {
+            vertical-align: middle;
+        }
+
+        .user-dashboard-info-box td li {
+            margin: 0 4px;
+        }
+
+        .user-dashboard-info-box .table thead th {
+            border-bottom: none;
+        }
+
+        .table.manage-candidates-top th {
+            border: 0;
+        }
+
+        .user-dashboard-info-box .candidate-list-favourite-time .candidate-list-favourite {
+            margin-bottom: 10px;
+        }
+
+        .table.manage-candidates-top {
+            min-width: 650px;
+        }
+
+        .user-dashboard-info-box .candidate-list-details ul {
+            color: #969696;
+        }
+
+        /* Candidate List */
+        .candidate-list {
+            background: #ffffff;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            border-bottom: 1px solid #eeeeee;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 20px;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .candidate-list:hover {
+            -webkit-box-shadow: 0px 0px 34px 4px rgba(33, 37, 41, 0.06);
+            box-shadow: 0px 0px 34px 4px rgba(33, 37, 41, 0.06);
+            position: relative;
+            z-index: 99;
+        }
+
+        .candidate-list:hover a.candidate-list-favourite {
+            color: #e74c3c;
+            -webkit-box-shadow: -1px 4px 10px 1px rgba(24, 111, 201, 0.1);
+            box-shadow: -1px 4px 10px 1px rgba(24, 111, 201, 0.1);
+        }
+
+        .candidate-list .candidate-list-image {
+            margin-right: 25px;
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 80px;
+            flex: 0 0 80px;
+            border: none;
+        }
+
+        .candidate-list .candidate-list-image img {
+            width: 80px;
+            height: 80px;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+
+        .candidate-list-title {
+            margin-bottom: 5px;
+        }
+
+        .candidate-list-details ul {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-bottom: 0px;
+        }
+
+        .candidate-list-details ul li {
+            margin: 5px 10px 5px 0px;
+            font-size: 13px;
+        }
+
+        .candidate-list .candidate-list-favourite-time {
+            margin-left: auto;
+            text-align: center;
+            font-size: 13px;
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 90px;
+            flex: 0 0 90px;
+        }
+
+        .candidate-list-title a {
+            color: inherit;
+            /* Inherits the color from the parent element */
+            text-decoration: none;
+            /* Removes the underline */
+        }
+
+        .candidate-list .candidate-list-favourite-time span {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .candidate-list .candidate-list-favourite-time .candidate-list-favourite {
+            display: inline-block;
+            position: relative;
+            height: 40px;
+            width: 40px;
+            line-height: 40px;
+            border: 1px solid #eeeeee;
+            border-radius: 100%;
+            text-align: center;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #646f79;
+        }
+
+        .candidate-list .candidate-list-favourite-time .candidate-list-favourite:hover {
+            background: #ffffff;
+            color: #e74c3c;
+        }
+
+        .candidate-banner .candidate-list:hover {
+            position: inherit;
+            -webkit-box-shadow: inherit;
+            box-shadow: inherit;
+            z-index: inherit;
+        }
+
+        .bg-white {
+            background-color: #ffffff !important;
+        }
+
+        .p-4 {
+            padding: 1.5rem !important;
+        }
+
+        .mb-0,
+        .my-0 {
+            margin-bottom: 0 !important;
+        }
+
+        .shadow-sm {
+            box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+        }
+
+        .user-dashboard-info-box .candidates-list .thumb {
+            margin-right: 20px;
+        }
+
+        #maincontent {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /*Footer*/
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            max-width: 150px;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding: 2rem 15px 0;
+            border-top: 1px solid #444;
+        }
+
+        .social-icons a {
+            margin-right: 1rem;
+        }
+
+        .social-icons img {
+            width: 24px;
+            height: 24px;
+            filter: invert(100%);
+            transition: opacity 0.3s ease;
+        }
+
+        .social-icons img:hover {
+            opacity: 0.8;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            margin-left: 1.5rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        @@media (max-width: 768px) {
+            .search-fields {
+                flex-direction: column;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                margin-top: 1.5rem;
+            }
+
+            .footer-links a {
+                margin: 0 0.75rem;
+            }
+        }
+
+        @@media (max-width: 991.98px) {
+
+            .dropdown-menu {
+                background-color: transparent;
+                border: none;
+                padding-left: 1rem;
+            }
+
+            .dropdown-item {
+                padding: 0.5rem 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+            .pagination .page-link.disabled {
+                color: #ccc;
+                cursor: not-allowed;
+            }
+
+            /* css for Search bar for candidates */
+            .search-fields {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <h1 class="navbar-brand">HOLTECHUNT</h1>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home" href="@Url.Action("Homepage")"><i class="fas fa-home me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("AboutUs")"><i class="fas fa-info-circle me-1"></i>About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../AllJobsPage/AllJobs.html"><i class="fas fa-briefcase me-1"></i>All Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Usermanagement")"><i class="fas fa-wrench me-1"></i>User Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-envelope me-1"></i>Contact</a>
+                    </li>
+                </ul>
+                <a href="../PostJob/PostAJob.html" class="btn btn-outline-danger me-2" id="postajob"><i
+                        class="fas fa-plus-circle me-2"></i>Post a Job</a>
+                @*<a href="../Login&Signup/login_interact.html" class="btn btn-success"><i
+                        class="fas fa-sign-in-alt me-2"></i>Log In</a>*@
+<!-- User dp with log-out and profile tabs -->
+@*  <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle user-dp" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle me-1"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="@Url.Action("Logout", "homie")">Log Out</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("Userprofile", "homie")">Profile</a></li>
+
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar end -->
+
+
+    <!-- Main Content -->
+    <div class="container mt-3 mb-4" id="maincontent">
+        <div class="col-lg-9 mt-4 mt-lg-0">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm">
+                        <!-- Search bar for candidates -->
+                        <div class="row search-fields">
+                            <div class="col-md-10">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="text-md-end">
+                                    <button type="button" class="btn btn-primary">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Search bar for candidates end-->
+
+                        <!-- Table for all candidates -->
+
+                        <table class="table manage-candidates-top mb-0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <h1>User Name</h1>
+                                    </th>
+                                    <th class="action text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var item in Model){
+
+
+                                <tr class="candidates-list">
+                                    <td class="title">
+                                        <div class="thumb">
+                                                @{
+
+                                                    string base64String = item.Profilepic != null ? Convert.ToBase64String(item.Profilepic) : null;
+                                                }
+
+                                                @if (!string.IsNullOrEmpty(base64String))
+                                                {
+                                                    <img class="img-fluid" src="data:image/png;base64,@base64String" alt="Profile Picture">
+                                                }
+                                                else
+                                                {
+                                                    <img class="img-fluid" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Default Profile Picture">
+                                                }
+                                        </div>
+                                        <div class="candidate-list-details">
+                                            <div class="candidate-list-info">
+                                                <div class="candidate-list-title">
+                                                    <h5 class="mb-0"><a href="#">@Html.DisplayFor(modelItem => item.Firstname)</a></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <ul class="list-unstyled mb-0 d-flex justify-content-center">
+                                            <li>
+                                                <a href="#" class="text-info" data-toggle="tooltip" title="" data-original-title="Edit">
+                                                    <svg height="30px" viewBox="0 -960 960 960" width="30px" fill="green">
+                                                        <path d="M200-200h50.46l409.46-409.46-50.46-50.46L200-250.46V-200Zm-60 60v-135.38l527.62-527.39q9.07-8.24 20.03-12.73 10.97-4.5 23-4.5t23.3 4.27q11.28 4.27 19.97 13.58l48.85 49.46q9.31 8.69 13.27 20 3.96 11.31 3.96 22.62 0 12.07-4.12 23.03-4.12 10.97-13.11 20.04L275.38-140H140Zm620.38-570.15-50.23-50.23 50.23 50.23Zm-126.13 75.9-24.79-25.67 50.46 50.46-25.67-24.79Z"/>
+                                                    </svg>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="text-danger" data-toggle="tooltip" title="" data-original-title="Delete">
+                                                    <svg height="30px" viewBox="0 -960 960 960" width="30px" fill="red">
+                                                        <path d="M292.31-140q-29.92 0-51.12-21.19Q220-182.39 220-212.31V-720h-40v-60h180v-35.38h240V-780h180v60h-40v507.69Q740-182 719-161q-21 21-51.31 21H292.31ZM680-720H280v507.69q0 5.39 3.46 8.85t8.85 3.46h375.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46V-720ZM376.16-280h59.99v-360h-59.99v360Zm147.69 0h59.99v-360h-59.99v360ZM280-720v520-520Z"/>
+                                                    </svg>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                        <div class="text-center mt-3 mt-sm-3">
+                            <ul class="pagination justify-content-center mb-0">
+                                <li class="page-item disabled"> <span class="page-link">Prev</span> </li>
+                                <li class="page-item active" aria-current="page"><span class="page-link">1 </span> <span
+                                        class="sr-only">(current)</span></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                <li class="page-item"><a class="page-link" href="#">25</a></li>
+                                <li class="page-item"> <a class="page-link" href="#">Next</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer section start -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <img src="../Images/whitelogo.png" alt="Holtec International Logo" class="footer-logo">
+                <address>
+                    <strong>Holtec International</strong><br>
+                    1 Holtec Boulevard<br>
+                    Camden, NJ 08104, USA<br>
+                    Phone: +1 (856) 797-0900
+                </address>
+            </div>
+            <div class="footer-section">
+                <h4>Working at Holtec</h4>
+                <ul>
+                    <li><a href="#">Browse jobs</a></li>
+                    <li><a href="#">Talent community</a></li>
+                    <li><a href="#">Alumni</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>About us</h4>
+                <ul>
+                    <li><a href="#">Life at Holtec</a></li>
+                    <li><a href="#">Diversity & Inclusion</a></li>
+                    <li><a href="#">Locations</a></li>
+                    <li><a href="#">Interview tips</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Students</h4>
+                <ul>
+                    <li><a href="#">Opportunities for students</a></li>
+                    <li><a href="#">Entry level positions</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-icons">
+                <a href="#"><img src="../Images/facebook.png" alt="Facebook"></a>
+                <a href="#"><img src="../Images/linkedin.png" alt="LinkedIn"></a>
+                <a href="#"><img src="../Images/instagram.png" alt="Instagram"></a>
+                <a href="#"><img src="../Images/twitter.png" alt="Twitter"></a>
+            </div>
+            <p>&copy; 2024 Holtec International. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Site Map</a>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer section end -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const pages = document.querySelectorAll('.page');
+            const paginationButtons = document.querySelectorAll('.pagination .page-link');
+            const prevButton = document.getElementById('prevPage');
+            const nextButton = document.getElementById('nextPage');
+
+            let currentPage = 1;
+            const totalPages = pages.length;
+
+            function showPage(pageNumber) {
+                pages.forEach((page, index) => {
+                    page.classList.toggle('d-none', index + 1 !== pageNumber);
+                });
+
+                currentPage = pageNumber;
+
+                // Update the button states
+                prevButton.classList.toggle('disabled', currentPage === 1);
+                nextButton.classList.toggle('disabled', currentPage === totalPages);
+
+                // Update button colors
+                const btnColor = '#ff7f50';
+                paginationButtons.forEach(button => {
+                    button.style.color = btnColor;
+                });
+                prevButton.style.color = nextButton.style.color = btnColor;
+            }
+
+            paginationButtons.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const pageNumber = parseInt(this.getAttribute('data-page'));
+                    if (!isNaN(pageNumber)) {
+                        showPage(pageNumber);
+                    }
+                });
+            });
+
+            prevButton.addEventListener('click', function (event) {
+                event.preventDefault();
+                if (currentPage > 1) {
+                    showPage(currentPage - 1);
+                }
+            });
+
+            nextButton.addEventListener('click', function (event) {
+                event.preventDefault();
+                if (currentPage < totalPages) {
+                    showPage(currentPage + 1);
+                }
+            });
+
+            // Initialize to show first page
+            showPage(1);
+        });
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>
+*@

@@ -1,0 +1,430 @@
+:root {
+    --primary-color: #cd6f6c;
+    --secondary-color: #50c878;
+    --text-color: #333;
+    --hover-color: #ce7976;
+    --background-color: #f8f9fa;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    padding: 10px;
+    border-bottom: none;
+}
+
+.wizard-container {
+    padding: 20px;
+    position: relative;
+}
+
+.wizard-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.wizard-progress::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #e0e0e0;
+    z-index: 1;
+}
+
+.wizard-step {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: white;
+    border: 4px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.wizard-step.active {
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.wizard-step.completed {
+    border-color: var(--secondary-color);
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.wizard-progress .progress-bar {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 4px;
+    background-color: var(--secondary-color);
+    z-index: 1;
+    transition: width 0.5s ease;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.form-control,
+.form-select {
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+    padding: 12px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+}
+
+.btn-wizard {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.btn-wizard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--hover-color);
+}
+
+.btn-wizard:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/*Banner Styles*/
+.banner {
+    position: relative; /* Establish a positioning context */
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(/Images/bg2.jpeg); /* Background image */
+    background-size: cover; /* Ensure the image covers the element */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent image repetition */
+    color: aliceblue; /* Text color */
+}
+
+.banner::before {
+    content: ""; /* Required for pseudo-elements */
+    position: absolute; /* Position it absolutely within the .banner */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 1; /* Make sure the overlay is above the background image but below the text */
+}
+
+.banner h1 {
+    position: relative; /* Ensure text is above the overlay */
+    z-index: 2; /* Ensure the text is above the overlay */
+    margin: 0; /* Remove default margin */
+}
+
+/*About Section styles*/
+
+.about-section {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.about-header h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+.about-stats {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.stat-item {
+    margin: 0 20px;
+    text-align: center;
+}
+
+.stat-item img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.stat-item h3 {
+    font-size: 20px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.stat-item p {
+    font-size: 14px;
+    color: #666;
+}
+
+.benefits-section {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.benefits-section h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.benefits-section p {
+    font-size: 14px;
+    color: #666;
+    margin: 10px 0;
+}
+
+.benefits-section button {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.benefits-section button:hover {
+    background-color: #e65c00;
+}
+
+/*Why join holtec*/
+
+.why-join-section {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.why-join-section h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+.benefits-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.benefit-item {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.benefit-item img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.benefit-item h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.benefit-item p {
+    font-size: 14px;
+    color: #666;
+}
+
+/*Footer Styles*/
+
+footer {
+    background-color: #222;
+    color: #fff;
+    padding: 40px 20px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+}
+
+.footer-logo {
+    max-width: 150px;
+}
+
+.footer-section h4 {
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #bbb;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 20px auto 0;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+}
+
+.social-icons a {
+    margin: 0 10px;
+}
+
+.social-icons img {
+    width: 24px;
+    height: 24px;
+    filter: invert(100%);
+    /* Inverts the color to white for better visibility on dark background */
+}
+
+.footer-links a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #bbb;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.wizard-form {
+    animation: fadeIn 0.5s ease;
+    display: none;
+}
+
+.wizard-form.active {
+    display: block;
+}
+
+/* Decorative elements */
+.decoration {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-color: rgba(74, 144, 226, 0.1);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.decoration-1 {
+    top: -75px;
+    left: -75px;
+}
+
+.decoration-2 {
+    bottom: -75px;
+    right: -75px;
+}
+
+/* Add this new style for larger screens */
+@media (min-width: 992px) {
+    .col-lg-10 {
+        flex: 0 0 auto;
+        width: 83.33333333%;
+    }
+}
+
+/* Optional: Adjust card max-width for very large screens */
+@media (min-width: 1200px) {
+    .card {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+}

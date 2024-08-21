@@ -1,0 +1,557 @@
+﻿@model holtec4.Models.Alluserdatum
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - HOLTECHUNT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/navbarFooter.css">
+    <style>
+        :root {
+            --primary-color: #d9534f;
+            --secondary-color: #5cb85c;
+            --background-color: #f0f2f5;
+            --text-color: #222;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--background-color) 0%, #e6e9f0 100%);
+            color: var(--text-color);
+        }
+
+        .navbar {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color) !important;
+            font-size: 2rem;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+            .btn-outline-primary:hover {
+                background-color: var(--primary-color);
+                color: var(--card-bg);
+            }
+
+        #profile-section {
+            display: flex;
+            padding: 2rem 0;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @@keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+            .sidebar .profile {
+                text-align: center;
+                padding-bottom: 1.5rem;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+                .sidebar .profile img {
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin-bottom: 1rem;
+                    border: 4px solid var(--primary-color);
+                    transition: transform 0.3s ease;
+                }
+
+                    .sidebar .profile img:hover {
+                        transform: scale(1.05);
+                    }
+
+            .sidebar ul li a {
+                display: flex;
+                align-items: center;
+                padding: 0.75rem 1rem;
+                color: var(--text-color);
+                text-decoration: none;
+                transition: all 0.3s ease;
+                border-radius: 5px;
+            }
+
+                .sidebar ul li a:hover {
+                    background-color: rgba(74, 144, 226, 0.1);
+                    color: var(--primary-color);
+                    transform: translateX(5px);
+                }
+
+        .main-content {
+            flex: 1;
+            padding: 0 2rem;
+        }
+
+        .dashboard {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            }
+
+        .card-title {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .details-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+            .details-list li {
+                margin-bottom: 0.5rem;
+            }
+
+        .education-item, .experience-item {
+            margin-bottom: 1rem;
+        }
+
+            .education-item:last-child, .experience-item:last-child {
+                margin-bottom: 0;
+            }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        #logo_b {
+            width: 100px;
+            height: 100px;
+        }
+
+        .badge.full-time {
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+        }
+
+        .badge.featured {
+            background-color: var(--secondary-color);
+            color: var(--card-bg);
+        }
+
+        #side {
+            list-style-type: none;
+        }
+
+        .editable {
+            background-color: #e0f7fa;
+            border: 1px dashed #00796b;
+        }
+
+        .wizard-form-checkbox {
+            margin: 10px 0;
+        }
+
+        button {
+            margin: 10px 5px;
+        }
+
+        @@media (max-width: 768px) {
+            #profile-section {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-bottom: 2rem;
+            }
+
+            .main-content {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar start -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <h1 class="navbar-brand">HOLTECHUNT</h1>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home" href="@Url.Action("Homepage", "homie")">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("AboutUs", "homie")">
+                            <i class="fas fa-info-circle me-1"></i>About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Alljobs", "homie")">
+                            <i class="fas fa-briefcase me-1"></i>All
+                            Jobs
+                        </a>
+                    </li>
+                    @if (ViewBag.userrole == "admin")
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Usermanagement", "homie")"><i class="fas fa-wrench me-1"></i>User Management</a>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-envelope me-1"></i>Contact</a>
+                    </li>
+                </ul>
+                @if (ViewBag.userrole == "admin")
+                {
+                    <a href="@Url.Action("postjob","homie")" class="btn btn-outline-danger me-2" id="postajob">
+                        <i class="fas fa-plus-circle me-2"></i>Post a Job
+                    </a>
+                }
+                @*<a href="../Login&Signup/login_interact.html" class="btn btn-success"><i
+                class="fas fa-sign-in-alt me-2"></i>Log In</a>*@
+                <!-- User dp with log-out and profile tabs -->
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle user-dp" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle me-1"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="@Url.Action("Logout", "homie")">Log Out</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("Userprofile", "homie")">Profile</a></li>
+
+                </div>
+            </div>
+    </nav>
+    <!-- Navbar end -->
+    <!--Profile Section Start-->
+    <div class="container" id="profile-section">
+        <div class="sidebar">
+            <div class="profile">
+                <img src="../UserProfile/dp.png" alt="User Picture">
+                <h3>@ViewBag.Fullname</h3>
+                <p>Software Engineer</p>
+                <p><i class="fas fa-map-marker-alt"></i> Mumbai, India</p>
+                <p><i class="fas fa-envelope"></i> @ViewBag.Email</p>
+            </div>
+            <ul id="side">
+                <li><a href="@Url.Action("Userprofile","homie")"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-star"></i> Shortlisted Jobs</a></li>
+                <li><a href="@Url.Action("AppliedJobs", "homie")"><i class="fas fa-clipboard-list"></i> Applied Job</a></li>
+                <li><a href="@Url.Action("Userdata", "homie")"><i class="fas fa-user"></i> My Profile</a></li>
+                <li><a href="@Url.Action("Logout", "homie")"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="dashboard">
+                <div class="container mt-2">
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="profile-info">
+                                <h3 contenteditable="false"><strong>@ViewBag.Fullname</strong></h3>
+                                <h4 contenteditable="false"><strong>Software Developer</strong></h4>
+                                <div class="social-links m-2">
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-actions">
+                            <button id="uploadCvBtn" class="btn btn-info" disabled>Upload CV</button>
+                            <input type="file" id="cvInput" style="display: none;" />
+
+                            <a href="@Url.Action("EditUser", "homie")" class="btn btn-success"><i class="fas fa-edit"></i> Edit</a>
+
+                            
+                        </div>
+                        <div class="profile-content m-2">
+                            @*<div class="card mb-3">
+                                <div class="card-body">
+                                    <h4 class="card-title"><strong>About Me</strong></h4>
+                                    <p contenteditable="false">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                                </div>
+                            </div>*@
+
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h4 class="card-title"><strong>Details</strong></h4>
+                                    <ul class="details-list">
+                                        <li><strong>Age:</strong> <span contenteditable="false">@ViewBag.Age</span></li>
+                                        @*<li><strong>Location:</strong> <span contenteditable="false">Bucharest, Romania</span></li>*@
+                                        <li><strong>Email:</strong> <span contenteditable="false">@ViewBag.Email</span></li>
+                                        <li><strong>Phone:</strong> <span contenteditable="false">@Model.PhoneNumber</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h4 class="card-title"><strong>Education</strong></h4>
+                                    @if(Model.Masters!=null){
+                                    <div class="education-item">
+                                        <h5 contenteditable="false"><strong>@Model.Masters</strong></h5>
+                                        <p contenteditable="false">Percentage: @Model.MastersMarks, Year: @Model.MastersYear</p>
+                                    </div>
+                                    }
+                                    <div class="education-item">
+                                        <h5 contenteditable="false"><strong>@Model.Bachelors</strong></h5>
+                                        <p contenteditable="false"> Percentage: @Model.BachelorsMarks, Year: @Model.BachelorsYear</p>
+                                    </div>
+                                    @if(Model.Diploma!=null){
+                                    <div class="education-item">
+                                        <h5 contenteditable="false"><strong>@Model.Diploma</strong></h5>
+                                        <p contenteditable="false"> Precentage: @Model.DiplomaMarks, Year: @Model.DiplomaYear</p>
+                                    </div>
+                                    }
+                                    <div class="education-item">
+                                        <h5 contenteditable="false"><strong>@Model.ClassXii</strong></h5>
+                                        <p contenteditable="false">Percentage: @Model.XiiMarks, Year: @Model.XiiYear</p>
+                                    </div>
+                                    <div class="education-item">
+                                        <h5 contenteditable="false"><strong>@Model.ClassX</strong></h5>
+                                        <p contenteditable="false">Percentage: @Model.XMarks, Year: @Model.XYear</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h4 class="card-title"><strong>Experience</strong></h4>
+                                    <div class="experience-item">
+                                        <h5 contenteditable="false"><strong>@Model.Role1</strong></h5>
+                                        <p contenteditable="false">@Model.Company1, @Model.Years1</p>
+                                        @*<p contenteditable="false">Led development teams in creating innovative software solutions.</p>*@
+                                    </div>
+                                    @if(Model.Role2!=null){
+                                    <div class="experience-item">
+                                        <h5 contenteditable="false"><strong>@Model.Role2</strong></h5>
+                                        <p contenteditable="false">@Model.Company2, @Model.Years2</p>
+                                        @*<p contenteditable="false">Developed and maintained complex web applications.</p>*@
+                                    </div>
+                                    }
+                                    @if(Model.Role3!=null){
+                                    <div class="experience-item">
+                                        <h5 contenteditable="false"><strong>@Model.Role3</strong></h5>
+                                        <p contenteditable="false">@Model.Company3, @Model.Years3</p>
+                                        @*<p contenteditable="false">Developed and maintained complex web applications.</p>*@
+                                    </div>
+                                    }
+                                    @if(Model.Role4!=null){
+                                    <div class="experience-item">
+                                        <h5 contenteditable="false"><strong>@Model.Role4</strong></h5>
+                                        <p contenteditable="false">@Model.Company4, @Model.Years4</p>
+                                        @*<p contenteditable="false">Developed and maintained complex web applications.</p>*@
+                                    </div>
+                                    }
+                                    @if(Model.Role5!=null){
+                                    <div class="experience-item">
+                                        <h5 contenteditable="false"><strong>@Model.Role5</strong></h5>
+                                        <p contenteditable="false">@Model.Company5, @Model.Years5</p>
+                                        @*<p contenteditable="false">Developed and maintained complex web applications.</p>*@
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h4 class="card-title"><strong>Skills</strong></h4>
+                                    <div id="skills-section">
+                                        <div class="form-group">
+                                            <form id="skillsForm">
+                                                @if (Model.Cplusplus == true)
+                                                {
+                                                    <p>C++</p>
+                                                    @*<div class="wizard-form-checkbox">
+                                                        <input type="checkbox" id="skill1" name="skills" value="C++" disabled>
+                                                        <label for="skill1">C++</label>
+                                                    </div>*@
+                                                }
+                                                @if(Model.Javascript==true){
+                                                    <p>JavaScript</p>
+                                                @*<div class="wizard-form-checkbox">
+                                                    <input type="checkbox" id="skill2" name="skills" value="JavaScript" disabled>
+                                                    <label for="skill2">JavaScript</label>
+                                                </div>*@
+                                                }
+                                                @if(Model.C==true){
+                                                    <p>C#</p>
+                                                @*<div class="wizard-form-checkbox">
+                                                    <input type="checkbox" id="skill3" name="skills" value="C#" disabled>
+                                                    <label for="skill3">C#</label>
+                                                    </div>*@
+                                                }
+                                                @if(Model.Python==true){
+                                                    <p>Python</p>
+                                                @*<div class="wizard-form-checkbox">
+                                                    <input type="checkbox" id="skill4" name="skills" value="Python" disabled>
+                                                    <label for="skill4">Python</label>
+                                                </div>*@
+                                                }
+                                                @if(Model.Java==true){
+                                                    <p>Java</p>
+                                                @*<div class="wizard-form-checkbox">
+                                                    <input type="checkbox" id="skill5" name="skills" value="Java" disabled>
+                                                    <label for="skill5">Java</label>
+                                                </div>*@
+                                                }
+                                                @if(Model.Html==true){
+                                                    <p>HTML</p>
+                                                @*<div class="wizard-form-checkbox">
+                                                    <input type="checkbox" id="skill6" name="skills" value="HTML" disabled>
+                                                    <label for="skill6">HTML</label>
+                                                </div>*@
+                                                }
+                                                @if(Model.Flutter==true){
+                                                    <p>Flutter</p>
+                                                @*<div class="wizard-form-checkbox">
+                                                    <input type="checkbox" id="skill7" name="skills" value="Flutter" disabled>
+                                                    <label for="skill7">Flutter</label>
+                                                </div>*@
+                                                }
+                                                @if(Model.Aiml==true){
+                                                    <p>AI/ML</p>
+                                                @*<div class="wizard-form-checkbox">
+                                                    <input type="checkbox" id="skill8" name="skills" value="AI/ML" disabled>
+                                                    <label for="skill8">AI/ML</label>
+                                                </div>*@
+                                                }
+                                                @if(Model.React==true){
+                                                    <p>React</p>
+                                                @*<div class="wizard-form-checkbox">
+                                                    <input type="checkbox" id="skill9" name="skills" value="React" disabled>
+                                                    <label for="skill9">React</label>
+                                                </div>*@
+                                                }
+                                                @if(Model.Angular==true){
+                                                    <p>Angular</p>
+                                                @*<div class="wizard-form-checkbox">
+                                                    <input type="checkbox" id="skill10" name="skills" value="Angular" disabled>
+                                                    <label for="skill10">Angular</label>
+                                                </div>*@
+                                                }
+                                                @if(Model.Autocad==true){
+                                                    <p>AutoCAD</p>
+                                                @*<div class="wizard-form-checkbox">
+                                                    <input type="checkbox" id="skill11" name="skills" value="AutoCAD" disabled>
+                                                    <label for="skill11">AutoCAD</label>
+                                                </div>*@
+                                                }
+                                                @if(Model.ComputerGraphics==true){
+                                                    <p>Computer Graphics</p>
+                                                @*<div class="wizard-form-checkbox">
+                                                    <input type="checkbox" id="skill12" name="skills" value="Computer Graphics" disabled>
+                                                    <label for="skill12">Computer Graphics</label>
+                                                </div>*@
+                                                }
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Profile Section End-->
+    <!-- Footer section start -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <img src="../Images/whitelogo.png" alt="Holtec International Logo" class="footer-logo">
+                <address>
+                    <strong>Holtec International</strong><br>
+                    1 Holtec Boulevard<br>
+                    Camden, NJ 08104, USA<br>
+                    Phone: +1 (856) 797-0900
+                </address>
+            </div>
+            <div class="footer-section">
+                <p>
+                    <b><u>About Us</u></b>
+                    <br><br>
+                    Holtec International is a global turnkey supplier of equipment
+                    and systems for the energy industry and beyond. As a fully
+                    integrated supplier, Holtec possesses in-house capabilities to
+                    design, engineer, analyze, license, fabricate and construct
+                    these technologies. With nearly 1.5 million square feet of
+                    manufacturing space and innovation that knows no limits, Holtec
+                    provides components of exceptional quality and with timely
+                    delivery.
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="social-icons">
+                <a href="#"><img src="../Images/facebook.png" alt="Facebook"></a>
+                <a href="#"><img src="../Images/linkedin.png" alt="LinkedIn"></a>
+                <a href="#"><img src="../Images/instagram.png" alt="Instagram"></a>
+                <a href="#"><img src="../Images/twitter.png" alt="Twitter"></a>
+            </div>
+            <p>&copy; 2024 Holtec International. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Footer section end -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
